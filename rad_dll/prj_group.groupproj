@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C9C7E152-13EE-46AD-9437-153A70A4198F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="rad_dll_cpp.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\rad_dll_test\rad_dll_t.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="rad_dll_cpp">
+        <MSBuild Projects="rad_dll_cpp.cbproj"/>
+    </Target>
+    <Target Name="rad_dll_cpp:Clean">
+        <MSBuild Projects="rad_dll_cpp.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rad_dll_cpp:Make">
+        <MSBuild Projects="rad_dll_cpp.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="rad_dll_t">
+        <MSBuild Projects="..\rad_dll_test\rad_dll_t.dproj"/>
+    </Target>
+    <Target Name="rad_dll_t:Clean">
+        <MSBuild Projects="..\rad_dll_test\rad_dll_t.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="rad_dll_t:Make">
+        <MSBuild Projects="..\rad_dll_test\rad_dll_t.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="rad_dll_cpp;rad_dll_t"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="rad_dll_cpp:Clean;rad_dll_t:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="rad_dll_cpp:Make;rad_dll_t:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
